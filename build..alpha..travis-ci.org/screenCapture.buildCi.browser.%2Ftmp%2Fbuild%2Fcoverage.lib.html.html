@@ -1,0 +1,2707 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-apidoc/node_modules/apidoc/template/main.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-apidoc">npmtest-apidoc (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-apidoc/node_modules/apidoc/template/main.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">3.27% <small>(12 / 367)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 196)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 53)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">3.31% <small>(12 / 363)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-apidoc/node_modules/apidoc/template/</a> » main.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829</td><td class="line-coverage"><span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">require.config({
+    paths: {
+        bootstrap: './vendor/bootstrap.min',
+        diffMatchPatch: './vendor/diff_match_patch.min',
+        handlebars: './vendor/handlebars.min',
+        handlebarsExtended: './utils/handlebars_helper',
+        jquery: './vendor/jquery.min',
+        locales: './locales/locale',
+        lodash: './vendor/lodash.custom.min',
+        pathToRegexp: './vendor/path-to-regexp/index',
+        prettify: './vendor/prettify/prettify',
+        semver: './vendor/semver.min',
+        utilsSampleRequest: './utils/send_sample_request',
+        webfontloader: './vendor/webfontloader',
+        list: './vendor/list.min'
+    },
+    shim: {
+        bootstrap: {
+            deps: ['jquery']
+        },
+        diffMatchPatch: {
+            exports: 'diff_match_patch'
+        },
+        handlebars: {
+            exports: 'Handlebars'
+        },
+        handlebarsExtended: {
+            deps: ['jquery', 'handlebars'],
+            exports: 'Handlebars'
+        },
+        prettify: {
+            exports: 'prettyPrint'
+        }
+    },
+    urlArgs: 'v=' + (new Date()).getTime(),
+    waitSeconds: 15
+});
+&nbsp;
+<span class="cstat-no" title="statement not covered">require([</span>
+    'jquery',
+    'lodash',
+    'locales',
+    'handlebarsExtended',
+    './api_project.js',
+    './api_data.js',
+    'prettify',
+    'utilsSampleRequest',
+    'semver',
+    'webfontloader',
+    'bootstrap',
+    'pathToRegexp',
+    'list'
+], <span class="fstat-no" title="function not covered">function($, _, locale, Handlebars, apiProject, apiData, prettyPrint, sampleRequest, semver, WebFont) {</span>
+&nbsp;
+    // load google web fonts
+<span class="cstat-no" title="statement not covered">    loadGoogleFontCss();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var api = apiData.api;</span>
+&nbsp;
+    //
+    // Templates
+    //
+<span class="cstat-no" title="statement not covered">    var templateHeader         = Handlebars.compile( $('#template-header').html() );</span>
+<span class="cstat-no" title="statement not covered">    var templateFooter         = Handlebars.compile( $('#template-footer').html() );</span>
+<span class="cstat-no" title="statement not covered">    var templateArticle        = Handlebars.compile( $('#template-article').html() );</span>
+<span class="cstat-no" title="statement not covered">    var templateCompareArticle = Handlebars.compile( $('#template-compare-article').html() );</span>
+<span class="cstat-no" title="statement not covered">    var templateGenerator      = Handlebars.compile( $('#template-generator').html() );</span>
+<span class="cstat-no" title="statement not covered">    var templateProject        = Handlebars.compile( $('#template-project').html() );</span>
+<span class="cstat-no" title="statement not covered">    var templateSections       = Handlebars.compile( $('#template-sections').html() );</span>
+<span class="cstat-no" title="statement not covered">    var templateSidenav        = Handlebars.compile( $('#template-sidenav').html() );</span>
+&nbsp;
+    //
+    // apiProject defaults
+    //
+<span class="cstat-no" title="statement not covered">    if ( ! apiProject.template)</span>
+<span class="cstat-no" title="statement not covered">        apiProject.template = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (apiProject.template.withCompare == null)</span>
+<span class="cstat-no" title="statement not covered">        apiProject.template.withCompare = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (apiProject.template.withGenerator == null)</span>
+<span class="cstat-no" title="statement not covered">        apiProject.template.withGenerator = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (apiProject.template.forceLanguage)</span>
+<span class="cstat-no" title="statement not covered">        locale.setLanguage(apiProject.template.forceLanguage);</span>
+&nbsp;
+    // Setup jQuery Ajax
+<span class="cstat-no" title="statement not covered">    $.ajaxSetup(apiProject.template.jQueryAjaxSetup);</span>
+&nbsp;
+    //
+    // Data transform
+    //
+    // grouped by group
+<span class="cstat-no" title="statement not covered">    var apiByGroup = _.groupBy(api, <span class="fstat-no" title="function not covered">function(entry) {</span></span>
+<span class="cstat-no" title="statement not covered">        return entry.group;</span>
+    });
+&nbsp;
+    // grouped by group and name
+<span class="cstat-no" title="statement not covered">    var apiByGroupAndName = {};</span>
+<span class="cstat-no" title="statement not covered">    $.each(apiByGroup, <span class="fstat-no" title="function not covered">function(index, entries) {</span></span>
+<span class="cstat-no" title="statement not covered">        apiByGroupAndName[index] = _.groupBy(entries, <span class="fstat-no" title="function not covered">function(entry) {</span></span>
+<span class="cstat-no" title="statement not covered">            return entry.name;</span>
+        });
+    });
+&nbsp;
+    //
+    // sort api within a group by title ASC and custom order
+    //
+<span class="cstat-no" title="statement not covered">    var newList = [];</span>
+<span class="cstat-no" title="statement not covered">    var umlauts = { 'ä': 'ae', 'ü': 'ue', 'ö': 'oe', 'ß': 'ss' }; </span>// TODO: remove in version 1.0
+<span class="cstat-no" title="statement not covered">    $.each (apiByGroupAndName, <span class="fstat-no" title="function not covered">function(index, groupEntries) {</span></span>
+        // get titles from the first entry of group[].name[] (name has versioning)
+<span class="cstat-no" title="statement not covered">        var titles = [];</span>
+<span class="cstat-no" title="statement not covered">        $.each (groupEntries, <span class="fstat-no" title="function not covered">function(titleName, entries) {</span></span>
+<span class="cstat-no" title="statement not covered">            var title = entries[0].title;</span>
+<span class="cstat-no" title="statement not covered">            if(title !== undefined) {</span>
+<span class="cstat-no" title="statement not covered">                title.toLowerCase().replace(/[äöüß]/g, <span class="fstat-no" title="function not covered">function($0) {</span> <span class="cstat-no" title="statement not covered">return umlauts[$0]; </span>});</span>
+<span class="cstat-no" title="statement not covered">                titles.push(title + '#~#' + titleName); </span>// '#~#' keep reference to titleName after sorting
+            }
+        });
+        // sort by name ASC
+<span class="cstat-no" title="statement not covered">        titles.sort();</span>
+&nbsp;
+        // custom order
+<span class="cstat-no" title="statement not covered">        if (apiProject.order)</span>
+<span class="cstat-no" title="statement not covered">            titles = sortByOrder(titles, apiProject.order, '#~#');</span>
+&nbsp;
+        // add single elements to the new list
+<span class="cstat-no" title="statement not covered">        titles.forEach(<span class="fstat-no" title="function not covered">function(name) {</span></span>
+<span class="cstat-no" title="statement not covered">            var values = name.split('#~#');</span>
+<span class="cstat-no" title="statement not covered">            var key = values[1];</span>
+<span class="cstat-no" title="statement not covered">            groupEntries[key].forEach(<span class="fstat-no" title="function not covered">function(entry) {</span></span>
+<span class="cstat-no" title="statement not covered">                newList.push(entry);</span>
+            });
+        });
+    });
+    // api overwrite with ordered list
+<span class="cstat-no" title="statement not covered">    api = newList;</span>
+&nbsp;
+    //
+    // Group- and Versionlists
+    //
+<span class="cstat-no" title="statement not covered">    var apiGroups = {};</span>
+<span class="cstat-no" title="statement not covered">    var apiGroupTitles = {};</span>
+<span class="cstat-no" title="statement not covered">    var apiVersions = {};</span>
+<span class="cstat-no" title="statement not covered">    apiVersions[apiProject.version] = 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    $.each(api, <span class="fstat-no" title="function not covered">function(index, entry) {</span></span>
+<span class="cstat-no" title="statement not covered">        apiGroups[entry.group] = 1;</span>
+<span class="cstat-no" title="statement not covered">        apiGroupTitles[entry.group] = entry.groupTitle || entry.group;</span>
+<span class="cstat-no" title="statement not covered">        apiVersions[entry.version] = 1;</span>
+    });
+&nbsp;
+    // sort groups
+<span class="cstat-no" title="statement not covered">    apiGroups = Object.keys(apiGroups);</span>
+<span class="cstat-no" title="statement not covered">    apiGroups.sort();</span>
+&nbsp;
+    // custom order
+<span class="cstat-no" title="statement not covered">    if (apiProject.order)</span>
+<span class="cstat-no" title="statement not covered">        apiGroups = sortByOrder(apiGroups, apiProject.order);</span>
+&nbsp;
+    // sort versions DESC
+<span class="cstat-no" title="statement not covered">    apiVersions = Object.keys(apiVersions);</span>
+<span class="cstat-no" title="statement not covered">    apiVersions.sort(semver.compare);</span>
+<span class="cstat-no" title="statement not covered">    apiVersions.reverse();</span>
+&nbsp;
+    //
+    // create Navigationlist
+    //
+<span class="cstat-no" title="statement not covered">    var nav = [];</span>
+<span class="cstat-no" title="statement not covered">    apiGroups.forEach(<span class="fstat-no" title="function not covered">function(group) {</span></span>
+        // Mainmenu entry
+<span class="cstat-no" title="statement not covered">        nav.push({</span>
+            group: group,
+            isHeader: true,
+            title: apiGroupTitles[group]
+        });
+&nbsp;
+        // Submenu
+<span class="cstat-no" title="statement not covered">        var oldName = '';</span>
+<span class="cstat-no" title="statement not covered">        api.forEach(<span class="fstat-no" title="function not covered">function(entry) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (entry.group === group) {</span>
+<span class="cstat-no" title="statement not covered">                if (oldName !== entry.name) {</span>
+<span class="cstat-no" title="statement not covered">                    nav.push({</span>
+                        title: entry.title,
+                        group: group,
+                        name: entry.name,
+                        type: entry.type,
+                        version: entry.version
+                    });
+                } else {
+<span class="cstat-no" title="statement not covered">                    nav.push({</span>
+                        title: entry.title,
+                        group: group,
+                        hidden: true,
+                        name: entry.name,
+                        type: entry.type,
+                        version: entry.version
+                    });
+                }
+<span class="cstat-no" title="statement not covered">                oldName = entry.name;</span>
+            }
+        });
+    });
+&nbsp;
+    /**
+     * Add navigation items by analyzing the HTML content and searching for h1 and h2 tags
+     * @param nav Object the navigation array
+     * @param content string the compiled HTML content
+     * @param index where to insert items
+     * @return boolean true if any good-looking (i.e. with a group identifier) &lt;h1&gt; tag was found
+     */
+<span class="fstat-no" title="function not covered">    function add_nav(nav, content, index) {</span>
+<span class="cstat-no" title="statement not covered">        var found_level1 = false;</span>
+<span class="cstat-no" title="statement not covered">        if ( ! content) {</span>
+<span class="cstat-no" title="statement not covered">          return found_level1;</span>
+        }
+<span class="cstat-no" title="statement not covered">        var topics = content.match(/&lt;h(1|2).*?&gt;(.+?)&lt;\/h(1|2)&gt;/gi);</span>
+<span class="cstat-no" title="statement not covered">        if ( topics ) {</span>
+<span class="cstat-no" title="statement not covered">          topics.forEach(<span class="fstat-no" title="function not covered">function(entry) {</span></span>
+<span class="cstat-no" title="statement not covered">              var level = entry.substring(2,3);</span>
+<span class="cstat-no" title="statement not covered">              var title = entry.replace(/&lt;.+?&gt;/g, ''); </span>   // Remove all HTML tags for the title
+<span class="cstat-no" title="statement not covered">              var entry_tags = entry.match(/id="api-([^\-]+)(?:-(.+))?"/); </span>   // Find the group and name in the id property
+<span class="cstat-no" title="statement not covered">              var group = (entry_tags ? entry_tags[1] : null);</span>
+<span class="cstat-no" title="statement not covered">              var name = (entry_tags ? entry_tags[2] : null);</span>
+<span class="cstat-no" title="statement not covered">              if (level==1 &amp;&amp; title &amp;&amp; group)  {</span>
+<span class="cstat-no" title="statement not covered">                  nav.splice(index, 0, {</span>
+                      group: group,
+                      isHeader: true,
+                      title: title,
+                      isFixed: true
+                  });
+<span class="cstat-no" title="statement not covered">                  index++;</span>
+<span class="cstat-no" title="statement not covered">                  found_level1 = true;</span>
+              }
+<span class="cstat-no" title="statement not covered">              if (level==2 &amp;&amp; title &amp;&amp; group &amp;&amp; name)    {</span>
+<span class="cstat-no" title="statement not covered">                  nav.splice(index, 0, {</span>
+                      group: group,
+                      name: name,
+                      isHeader: false,
+                      title: title,
+                      isFixed: false,
+                      version: '1.0'
+                  });
+<span class="cstat-no" title="statement not covered">                  index++;</span>
+              }
+          });
+        }
+<span class="cstat-no" title="statement not covered">        return found_level1;</span>
+    }
+&nbsp;
+    // Mainmenu Header entry
+<span class="cstat-no" title="statement not covered">    if (apiProject.header) {</span>
+<span class="cstat-no" title="statement not covered">        var found_level1 = add_nav(nav, apiProject.header.content, 0); </span>// Add level 1 and 2 titles
+<span class="cstat-no" title="statement not covered">        if (!found_level1) {    // If no Level 1 tags were found, make a title</span>
+<span class="cstat-no" title="statement not covered">            nav.unshift({</span>
+                group: '_',
+                isHeader: true,
+                title: (apiProject.header.title == null) ? locale.__('General') : apiProject.header.title,
+                isFixed: true
+            });
+        }
+    }
+&nbsp;
+    // Mainmenu Footer entry
+<span class="cstat-no" title="statement not covered">    if (apiProject.footer) {</span>
+<span class="cstat-no" title="statement not covered">        var last_nav_index = nav.length;</span>
+<span class="cstat-no" title="statement not covered">        var found_level1 = add_nav(nav, apiProject.footer.content, nav.length); </span>// Add level 1 and 2 titles
+<span class="cstat-no" title="statement not covered">        if (!found_level1 &amp;&amp; apiProject.footer.title != null) {    // If no Level 1 tags were found, make a title</span>
+<span class="cstat-no" title="statement not covered">            nav.splice(last_nav_index, 0, {</span>
+                group: '_footer',
+                isHeader: true,
+                title: apiProject.footer.title,
+                isFixed: true
+            });
+        }
+    }
+&nbsp;
+    // render pagetitle
+<span class="cstat-no" title="statement not covered">    var title = apiProject.title ? apiProject.title : 'apiDoc: ' + apiProject.name + ' - ' + apiProject.version;</span>
+<span class="cstat-no" title="statement not covered">    $(document).attr('title', title);</span>
+&nbsp;
+    // remove loader
+<span class="cstat-no" title="statement not covered">    $('#loader').remove();</span>
+&nbsp;
+    // render sidenav
+<span class="cstat-no" title="statement not covered">    var fields = {</span>
+        nav: nav
+    };
+<span class="cstat-no" title="statement not covered">    $('#sidenav').append( templateSidenav(fields) );</span>
+&nbsp;
+    // render Generator
+<span class="cstat-no" title="statement not covered">    $('#generator').append( templateGenerator(apiProject) );</span>
+&nbsp;
+    // render Project
+<span class="cstat-no" title="statement not covered">    _.extend(apiProject, { versions: apiVersions});</span>
+<span class="cstat-no" title="statement not covered">    $('#project').append( templateProject(apiProject) );</span>
+&nbsp;
+    // render apiDoc, header/footer documentation
+<span class="cstat-no" title="statement not covered">    if (apiProject.header)</span>
+<span class="cstat-no" title="statement not covered">        $('#header').append( templateHeader(apiProject.header) );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (apiProject.footer)</span>
+<span class="cstat-no" title="statement not covered">        $('#footer').append( templateFooter(apiProject.footer) );</span>
+&nbsp;
+    //
+    // Render Sections and Articles
+    //
+<span class="cstat-no" title="statement not covered">    var articleVersions = {};</span>
+<span class="cstat-no" title="statement not covered">    var content = '';</span>
+<span class="cstat-no" title="statement not covered">    apiGroups.forEach(<span class="fstat-no" title="function not covered">function(groupEntry) {</span></span>
+<span class="cstat-no" title="statement not covered">        var articles = [];</span>
+<span class="cstat-no" title="statement not covered">        var oldName = '';</span>
+<span class="cstat-no" title="statement not covered">        var fields = {};</span>
+<span class="cstat-no" title="statement not covered">        var title = groupEntry;</span>
+<span class="cstat-no" title="statement not covered">        var description = '';</span>
+<span class="cstat-no" title="statement not covered">        articleVersions[groupEntry] = {};</span>
+&nbsp;
+        // render all articles of a group
+<span class="cstat-no" title="statement not covered">        api.forEach(<span class="fstat-no" title="function not covered">function(entry) {</span></span>
+<span class="cstat-no" title="statement not covered">            if(groupEntry === entry.group) {</span>
+<span class="cstat-no" title="statement not covered">                if (oldName !== entry.name) {</span>
+                    // determine versions
+<span class="cstat-no" title="statement not covered">                    api.forEach(<span class="fstat-no" title="function not covered">function(versionEntry) {</span></span>
+<span class="cstat-no" title="statement not covered">                        if (groupEntry === versionEntry.group &amp;&amp; entry.name === versionEntry.name) {</span>
+<span class="cstat-no" title="statement not covered">                            if ( ! articleVersions[entry.group].hasOwnProperty(entry.name) ) {</span>
+<span class="cstat-no" title="statement not covered">                                articleVersions[entry.group][entry.name] = [];</span>
+                            }
+<span class="cstat-no" title="statement not covered">                            articleVersions[entry.group][entry.name].push(versionEntry.version);</span>
+                        }
+                    });
+<span class="cstat-no" title="statement not covered">                    fields = {</span>
+                        article: entry,
+                        versions: articleVersions[entry.group][entry.name]
+                    };
+                } else {
+<span class="cstat-no" title="statement not covered">                    fields = {</span>
+                        article: entry,
+                        hidden: true,
+                        versions: articleVersions[entry.group][entry.name]
+                    };
+                }
+&nbsp;
+                // add prefix URL for endpoint
+<span class="cstat-no" title="statement not covered">                if (apiProject.url)</span>
+<span class="cstat-no" title="statement not covered">                    fields.article.url = apiProject.url + fields.article.url;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">                addArticleSettings(fields, entry);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">                if (entry.groupTitle)</span>
+<span class="cstat-no" title="statement not covered">                    title = entry.groupTitle;</span>
+&nbsp;
+                // TODO: make groupDescription compareable with older versions (not important for the moment)
+<span class="cstat-no" title="statement not covered">                if (entry.groupDescription)</span>
+<span class="cstat-no" title="statement not covered">                    description = entry.groupDescription;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">                articles.push({</span>
+                    article: templateArticle(fields),
+                    group: entry.group,
+                    name: entry.name
+                });
+<span class="cstat-no" title="statement not covered">                oldName = entry.name;</span>
+            }
+        });
+&nbsp;
+        // render Section with Articles
+<span class="cstat-no" title="statement not covered">        var fields = {</span>
+            group: groupEntry,
+            title: title,
+            description: description,
+            articles: articles
+        };
+<span class="cstat-no" title="statement not covered">        content += templateSections(fields);</span>
+    });
+<span class="cstat-no" title="statement not covered">    $('#sections').append( content );</span>
+&nbsp;
+    // Bootstrap Scrollspy
+<span class="cstat-no" title="statement not covered">    $(this).scrollspy({ target: '#scrollingNav', offset: 18 });</span>
+&nbsp;
+    // Content-Scroll on Navigation click.
+<span class="cstat-no" title="statement not covered">    $('.sidenav').find('a').on('click', <span class="fstat-no" title="function not covered">function(e) {</span></span>
+<span class="cstat-no" title="statement not covered">        e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered">        var id = $(this).attr('href');</span>
+<span class="cstat-no" title="statement not covered">        if ($(id).length &gt; 0)</span>
+<span class="cstat-no" title="statement not covered">            $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 400);</span>
+<span class="cstat-no" title="statement not covered">        window.location.hash = $(this).attr('href');</span>
+    });
+&nbsp;
+    // Quickjump on Pageload to hash position.
+<span class="cstat-no" title="statement not covered">    if(window.location.hash) {</span>
+<span class="cstat-no" title="statement not covered">        var id = window.location.hash;</span>
+<span class="cstat-no" title="statement not covered">        if ($(id).length &gt; 0)</span>
+<span class="cstat-no" title="statement not covered">            $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 0);</span>
+    }
+&nbsp;
+    /**
+     * Check if Parameter (sub) List has a type Field.
+     * Example: @apiSuccess          varname1 No type.
+     *          @apiSuccess {String} varname2 With type.
+     *
+     * @param {Object} fields
+     */
+<span class="fstat-no" title="function not covered">    function _hasTypeInFields(fields) {</span>
+<span class="cstat-no" title="statement not covered">        var result = false;</span>
+<span class="cstat-no" title="statement not covered">        $.each(fields, <span class="fstat-no" title="function not covered">function(name) {</span></span>
+<span class="cstat-no" title="statement not covered">            result = result || _.some(fields[name], <span class="fstat-no" title="function not covered">function(item) {</span> <span class="cstat-no" title="statement not covered">return item.type; </span>});</span>
+        });
+<span class="cstat-no" title="statement not covered">        return result;</span>
+    }
+&nbsp;
+    /**
+     * On Template changes, recall plugins.
+     */
+<span class="fstat-no" title="function not covered">    function initDynamic() {</span>
+        // Bootstrap popover
+<span class="cstat-no" title="statement not covered">        $('button[data-toggle="popover"]').popover().click(<span class="fstat-no" title="function not covered">function(e) {</span></span>
+<span class="cstat-no" title="statement not covered">            e.preventDefault();</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var version = $('#version strong').html();</span>
+<span class="cstat-no" title="statement not covered">        $('#sidenav li').removeClass('is-new');</span>
+<span class="cstat-no" title="statement not covered">        if (apiProject.template.withCompare) {</span>
+<span class="cstat-no" title="statement not covered">            $('#sidenav li[data-version=\'' + version + '\']').each(<span class="fstat-no" title="function not covered">function(){</span></span>
+<span class="cstat-no" title="statement not covered">                var group = $(this).data('group');</span>
+<span class="cstat-no" title="statement not covered">                var name = $(this).data('name');</span>
+<span class="cstat-no" title="statement not covered">                var length = $('#sidenav li[data-group=\'' + group + '\'][data-name=\'' + name + '\']').length;</span>
+<span class="cstat-no" title="statement not covered">                var index  = $('#sidenav li[data-group=\'' + group + '\'][data-name=\'' + name + '\']').index($(this));</span>
+<span class="cstat-no" title="statement not covered">                if (length === 1 || index === (length - 1))</span>
+<span class="cstat-no" title="statement not covered">                    $(this).addClass('is-new');</span>
+            });
+        }
+&nbsp;
+        // tabs
+<span class="cstat-no" title="statement not covered">        $('.nav-tabs-examples a').click(<span class="fstat-no" title="function not covered">function (e) {</span></span>
+<span class="cstat-no" title="statement not covered">            e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered">            $(this).tab('show');</span>
+        });
+<span class="cstat-no" title="statement not covered">        $('.nav-tabs-examples').find('a:first').tab('show');</span>
+&nbsp;
+        // sample request switch
+<span class="cstat-no" title="statement not covered">        $('.sample-request-switch').click(<span class="fstat-no" title="function not covered">function (e) {</span></span>
+<span class="cstat-no" title="statement not covered">            var name = '.' + $(this).attr('name') + '-fields';</span>
+<span class="cstat-no" title="statement not covered">            $(name).addClass('hide');</span>
+<span class="cstat-no" title="statement not covered">            $(this).parent().next(name).removeClass('hide');</span>
+        });
+&nbsp;
+        // call scrollspy refresh method
+<span class="cstat-no" title="statement not covered">        $(window).scrollspy('refresh');</span>
+&nbsp;
+        // init modules
+<span class="cstat-no" title="statement not covered">        sampleRequest.initDynamic();</span>
+    }
+<span class="cstat-no" title="statement not covered">    initDynamic();</span>
+&nbsp;
+    // Pre- / Code-Format
+<span class="cstat-no" title="statement not covered">    prettyPrint();</span>
+&nbsp;
+    //
+    // HTML-Template specific jQuery-Functions
+    //
+    // Change Main Version
+<span class="cstat-no" title="statement not covered">    $('#versions li.version a').on('click', <span class="fstat-no" title="function not covered">function(e) {</span></span>
+<span class="cstat-no" title="statement not covered">        e.preventDefault();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var selectedVersion = $(this).html();</span>
+<span class="cstat-no" title="statement not covered">        $('#version strong').html(selectedVersion);</span>
+&nbsp;
+        // hide all
+<span class="cstat-no" title="statement not covered">        $('article').addClass('hide');</span>
+<span class="cstat-no" title="statement not covered">        $('#sidenav li:not(.nav-fixed)').addClass('hide');</span>
+&nbsp;
+        // show 1st equal or lower Version of each entry
+<span class="cstat-no" title="statement not covered">        $('article[data-version]').each(<span class="fstat-no" title="function not covered">function(index) {</span></span>
+<span class="cstat-no" title="statement not covered">            var group = $(this).data('group');</span>
+<span class="cstat-no" title="statement not covered">            var name = $(this).data('name');</span>
+<span class="cstat-no" title="statement not covered">            var version = $(this).data('version');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (semver.lte(version, selectedVersion)) {</span>
+<span class="cstat-no" title="statement not covered">                if ($('article[data-group=\'' + group + '\'][data-name=\'' + name + '\']:visible').length === 0) {</span>
+                    // enable Article
+<span class="cstat-no" title="statement not covered">                    $('article[data-group=\'' + group + '\'][data-name=\'' + name + '\'][data-version=\'' + version + '\']').removeClass('hide');</span>
+                    // enable Navigation
+<span class="cstat-no" title="statement not covered">                    $('#sidenav li[data-group=\'' + group + '\'][data-name=\'' + name + '\'][data-version=\'' + version + '\']').removeClass('hide');</span>
+<span class="cstat-no" title="statement not covered">                    $('#sidenav li.nav-header[data-group=\'' + group + '\']').removeClass('hide');</span>
+                }
+            }
+        });
+&nbsp;
+        // show 1st equal or lower Version of each entry
+<span class="cstat-no" title="statement not covered">        $('article[data-version]').each(<span class="fstat-no" title="function not covered">function(index) {</span></span>
+<span class="cstat-no" title="statement not covered">            var group = $(this).data('group');</span>
+<span class="cstat-no" title="statement not covered">            $('section#api-' + group).removeClass('hide');</span>
+<span class="cstat-no" title="statement not covered">            if ($('section#api-' + group + ' article:visible').length === 0) {</span>
+<span class="cstat-no" title="statement not covered">                $('section#api-' + group).addClass('hide');</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                $('section#api-' + group).removeClass('hide');</span>
+            }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered">        initDynamic();</span>
+<span class="cstat-no" title="statement not covered">        return;</span>
+    });
+&nbsp;
+    // compare all article with their predecessor
+<span class="cstat-no" title="statement not covered">    $('#compareAllWithPredecessor').on('click', changeAllVersionCompareTo);</span>
+&nbsp;
+    // change version of an article
+<span class="cstat-no" title="statement not covered">    $('article .versions li.version a').on('click', changeVersionCompareTo);</span>
+&nbsp;
+    // compare url-parameter
+<span class="cstat-no" title="statement not covered">    $.urlParam = <span class="fstat-no" title="function not covered">function(name) {</span></span>
+<span class="cstat-no" title="statement not covered">        var results = new RegExp('[\\?&amp;amp;]' + name + '=([^&amp;amp;#]*)').exec(window.location.href);</span>
+<span class="cstat-no" title="statement not covered">        return (results &amp;&amp; results[1]) ? results[1] : null;</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if ($.urlParam('compare')) {</span>
+        // URL Paramter ?compare=1 is set
+<span class="cstat-no" title="statement not covered">        $('#compareAllWithPredecessor').trigger('click');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (window.location.hash) {</span>
+<span class="cstat-no" title="statement not covered">            var id = window.location.hash;</span>
+<span class="cstat-no" title="statement not covered">            $('html,body').animate({ scrollTop: parseInt($(id).offset().top) - 18 }, 0);</span>
+        }
+    }
+&nbsp;
+    /**
+     * Initialize search
+     */
+<span class="cstat-no" title="statement not covered">    var options = {</span>
+      valueNames: [ 'nav-list-item' ]
+    };
+<span class="cstat-no" title="statement not covered">    var endpointsList = new List('scrollingNav', options);</span>
+&nbsp;
+    /**
+     * Set initial focus to search input
+     */
+<span class="cstat-no" title="statement not covered">    $('#scrollingNav .sidenav-search input.search').focus();</span>
+&nbsp;
+    /**
+     * Detect ESC key to reset search
+     */
+<span class="cstat-no" title="statement not covered">    $(document).keyup(<span class="fstat-no" title="function not covered">function(e) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (e.keyCode === 27) <span class="cstat-no" title="statement not covered">$('span.search-reset').click();</span></span>
+    });
+&nbsp;
+    /**
+     * Search reset
+     */
+<span class="cstat-no" title="statement not covered">    $('span.search-reset').on('click', <span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">      $('#scrollingNav .sidenav-search input.search')</span>
+        .val("")
+        .focus()
+      ;
+<span class="cstat-no" title="statement not covered">      endpointsList.search();</span>
+    });
+&nbsp;
+    /**
+     * Change version of an article to compare it to an other version.
+     */
+<span class="fstat-no" title="function not covered">    function changeVersionCompareTo(e) {</span>
+<span class="cstat-no" title="statement not covered">        e.preventDefault();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var $root = $(this).parents('article');</span>
+<span class="cstat-no" title="statement not covered">        var selectedVersion = $(this).html();</span>
+<span class="cstat-no" title="statement not covered">        var $button = $root.find('.version');</span>
+<span class="cstat-no" title="statement not covered">        var currentVersion = $button.find('strong').html();</span>
+<span class="cstat-no" title="statement not covered">        $button.find('strong').html(selectedVersion);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var group = $root.data('group');</span>
+<span class="cstat-no" title="statement not covered">        var name = $root.data('name');</span>
+<span class="cstat-no" title="statement not covered">        var version = $root.data('version');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var compareVersion = $root.data('compare-version');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (compareVersion === selectedVersion)</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if ( ! compareVersion &amp;&amp; version == selectedVersion)</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (compareVersion &amp;&amp; articleVersions[group][name][0] === selectedVersion || version === selectedVersion) {</span>
+            // the version of the entry is set to the highest version (reset)
+<span class="cstat-no" title="statement not covered">            resetArticle(group, name, version);</span>
+        } else {
+<span class="cstat-no" title="statement not covered">            var $compareToArticle = $('article[data-group=\'' + group + '\'][data-name=\'' + name + '\'][data-version=\'' + selectedVersion + '\']');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var sourceEntry = {};</span>
+<span class="cstat-no" title="statement not covered">            var compareEntry = {};</span>
+<span class="cstat-no" title="statement not covered">            $.each(apiByGroupAndName[group][name], <span class="fstat-no" title="function not covered">function(index, entry) {</span></span>
+<span class="cstat-no" title="statement not covered">                if (entry.version === version)</span>
+<span class="cstat-no" title="statement not covered">                    sourceEntry = entry;</span>
+<span class="cstat-no" title="statement not covered">                if (entry.version === selectedVersion)</span>
+<span class="cstat-no" title="statement not covered">                    compareEntry = entry;</span>
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var fields = {</span>
+                article: sourceEntry,
+                compare: compareEntry,
+                versions: articleVersions[group][name]
+            };
+&nbsp;
+            // add unique id
+            // TODO: replace all group-name-version in template with id.
+<span class="cstat-no" title="statement not covered">            fields.article.id = fields.article.group + '-' + fields.article.name + '-' + fields.article.version;</span>
+<span class="cstat-no" title="statement not covered">            fields.article.id = fields.article.id.replace(/\./g, '_');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            fields.compare.id = fields.compare.group + '-' + fields.compare.name + '-' + fields.compare.version;</span>
+<span class="cstat-no" title="statement not covered">            fields.compare.id = fields.compare.id.replace(/\./g, '_');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var entry = sourceEntry;</span>
+<span class="cstat-no" title="statement not covered">            if (entry.parameter &amp;&amp; entry.parameter.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInParameterFields = _hasTypeInFields(entry.parameter.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (entry.error &amp;&amp; entry.error.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInErrorFields = _hasTypeInFields(entry.error.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (entry.success &amp;&amp; entry.success.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInSuccessFields = _hasTypeInFields(entry.success.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (entry.info &amp;&amp; entry.info.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInInfoFields = _hasTypeInFields(entry.info.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var entry = compareEntry;</span>
+<span class="cstat-no" title="statement not covered">            if (fields._hasTypeInParameterFields !== true &amp;&amp; entry.parameter &amp;&amp; entry.parameter.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInParameterFields = _hasTypeInFields(entry.parameter.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (fields._hasTypeInErrorFields !== true &amp;&amp; entry.error &amp;&amp; entry.error.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInErrorFields = _hasTypeInFields(entry.error.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (fields._hasTypeInSuccessFields !== true &amp;&amp; entry.success &amp;&amp; entry.success.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInSuccessFields = _hasTypeInFields(entry.success.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (fields._hasTypeInInfoFields !== true &amp;&amp; entry.info &amp;&amp; entry.info.fields)</span>
+<span class="cstat-no" title="statement not covered">                fields._hasTypeInInfoFields = _hasTypeInFields(entry.info.fields);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var content = templateCompareArticle(fields);</span>
+<span class="cstat-no" title="statement not covered">            $root.after(content);</span>
+<span class="cstat-no" title="statement not covered">            var $content = $root.next();</span>
+&nbsp;
+            // Event on.click re-assign
+<span class="cstat-no" title="statement not covered">            $content.find('.versions li.version a').on('click', changeVersionCompareTo);</span>
+&nbsp;
+            // select navigation
+<span class="cstat-no" title="statement not covered">            $('#sidenav li[data-group=\'' + group + '\'][data-name=\'' + name + '\'][data-version=\'' + currentVersion + '\']').addClass('has-modifications');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            $root.remove();</span>
+            // TODO: on change main version or select the highest version re-render
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        initDynamic();</span>
+    }
+&nbsp;
+    /**
+     * Compare all currently selected Versions with their predecessor.
+     */
+<span class="fstat-no" title="function not covered">    function changeAllVersionCompareTo(e) {</span>
+<span class="cstat-no" title="statement not covered">        e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered">        $('article:visible .versions').each(<span class="fstat-no" title="function not covered">function(){</span></span>
+<span class="cstat-no" title="statement not covered">            var $root = $(this).parents('article');</span>
+<span class="cstat-no" title="statement not covered">            var currentVersion = $root.data('version');</span>
+<span class="cstat-no" title="statement not covered">            var $foundElement = null;</span>
+<span class="cstat-no" title="statement not covered">            $(this).find('li.version a').each(<span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">                var selectVersion = $(this).html();</span>
+<span class="cstat-no" title="statement not covered">                if (selectVersion &lt; currentVersion &amp;&amp; ! $foundElement)</span>
+<span class="cstat-no" title="statement not covered">                    $foundElement = $(this);</span>
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if($foundElement)</span>
+<span class="cstat-no" title="statement not covered">                $foundElement.trigger('click');</span>
+        });
+<span class="cstat-no" title="statement not covered">        initDynamic();</span>
+    }
+&nbsp;
+    /**
+     * Sort the fields.
+     */
+<span class="fstat-no" title="function not covered">    function sortFields(fields_object) {</span>
+<span class="cstat-no" title="statement not covered">        $.each(fields_object, <span class="fstat-no" title="function not covered">function (key, fields) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var reversed = fields.slice().reverse()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var max_dot_count = Math.max.apply(null, reversed.map(<span class="fstat-no" title="function not covered">function (item) {</span></span>
+<span class="cstat-no" title="statement not covered">                return item.field.split(".").length - 1;</span>
+            }))
+&nbsp;
+<span class="cstat-no" title="statement not covered">            for (var dot_count = 1; dot_count &lt;= max_dot_count; dot_count++) {</span>
+<span class="cstat-no" title="statement not covered">                reversed.forEach(<span class="fstat-no" title="function not covered">function (item, index) {</span></span>
+<span class="cstat-no" title="statement not covered">                    var parts = item.field.split(".");</span>
+<span class="cstat-no" title="statement not covered">                    if (parts.length - 1 == dot_count) {</span>
+<span class="cstat-no" title="statement not covered">                        var fields_names = fields.map(<span class="fstat-no" title="function not covered">function (item) {</span> <span class="cstat-no" title="statement not covered">return item.field; </span>});</span>
+<span class="cstat-no" title="statement not covered">                        if (parts.slice(1).length  &gt;= 1) {</span>
+<span class="cstat-no" title="statement not covered">                            var prefix = parts.slice(0, parts.length - 1).join(".");</span>
+<span class="cstat-no" title="statement not covered">                            var prefix_index = fields_names.indexOf(prefix);</span>
+<span class="cstat-no" title="statement not covered">                            if (prefix_index &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered">                                fields.splice(fields_names.indexOf(item.field), 1);</span>
+<span class="cstat-no" title="statement not covered">                                fields.splice(prefix_index + 1, 0, item);</span>
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+&nbsp;
+    /**
+     * Add article settings.
+     */
+<span class="fstat-no" title="function not covered">    function addArticleSettings(fields, entry) {</span>
+        // add unique id
+        // TODO: replace all group-name-version in template with id.
+<span class="cstat-no" title="statement not covered">        fields.id = fields.article.group + '-' + fields.article.name + '-' + fields.article.version;</span>
+<span class="cstat-no" title="statement not covered">        fields.id = fields.id.replace(/\./g, '_');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (entry.header &amp;&amp; entry.header.fields) {</span>
+<span class="cstat-no" title="statement not covered">            sortFields(entry.header.fields);</span>
+<span class="cstat-no" title="statement not covered">            fields._hasTypeInHeaderFields = _hasTypeInFields(entry.header.fields);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (entry.parameter &amp;&amp; entry.parameter.fields) {</span>
+<span class="cstat-no" title="statement not covered">            sortFields(entry.parameter.fields);</span>
+<span class="cstat-no" title="statement not covered">            fields._hasTypeInParameterFields = _hasTypeInFields(entry.parameter.fields);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (entry.error &amp;&amp; entry.error.fields) {</span>
+<span class="cstat-no" title="statement not covered">            sortFields(entry.error.fields);</span>
+<span class="cstat-no" title="statement not covered">            fields._hasTypeInErrorFields = _hasTypeInFields(entry.error.fields);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (entry.success &amp;&amp; entry.success.fields) {</span>
+<span class="cstat-no" title="statement not covered">            sortFields(entry.success.fields);</span>
+<span class="cstat-no" title="statement not covered">            fields._hasTypeInSuccessFields = _hasTypeInFields(entry.success.fields);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (entry.info &amp;&amp; entry.info.fields) {</span>
+<span class="cstat-no" title="statement not covered">            sortFields(entry.info.fields);</span>
+<span class="cstat-no" title="statement not covered">            fields._hasTypeInInfoFields = _hasTypeInFields(entry.info.fields);</span>
+        }
+&nbsp;
+        // add template settings
+<span class="cstat-no" title="statement not covered">        fields.template = apiProject.template;</span>
+    }
+&nbsp;
+    /**
+     * Render Article.
+     */
+<span class="fstat-no" title="function not covered">    function renderArticle(group, name, version) {</span>
+<span class="cstat-no" title="statement not covered">        var entry = {};</span>
+<span class="cstat-no" title="statement not covered">        $.each(apiByGroupAndName[group][name], <span class="fstat-no" title="function not covered">function(index, currentEntry) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (currentEntry.version === version)</span>
+<span class="cstat-no" title="statement not covered">                entry = currentEntry;</span>
+        });
+<span class="cstat-no" title="statement not covered">        var fields = {</span>
+            article: entry,
+            versions: articleVersions[group][name]
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered">        addArticleSettings(fields, entry);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        return templateArticle(fields);</span>
+    }
+&nbsp;
+    /**
+     * Render original Article and remove the current visible Article.
+     */
+<span class="fstat-no" title="function not covered">    function resetArticle(group, name, version) {</span>
+<span class="cstat-no" title="statement not covered">        var $root = $('article[data-group=\'' + group + '\'][data-name=\'' + name + '\']:visible');</span>
+<span class="cstat-no" title="statement not covered">        var content = renderArticle(group, name, version);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        $root.after(content);</span>
+<span class="cstat-no" title="statement not covered">        var $content = $root.next();</span>
+&nbsp;
+        // Event on.click muss neu zugewiesen werden (sollte eigentlich mit on automatisch funktionieren... sollte)
+<span class="cstat-no" title="statement not covered">        $content.find('.versions li.version a').on('click', changeVersionCompareTo);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        $('#sidenav li[data-group=\'' + group + '\'][data-name=\'' + name + '\'][data-version=\'' + version + '\']').removeClass('has-modifications');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        $root.remove();</span>
+<span class="cstat-no" title="statement not covered">        return;</span>
+    }
+&nbsp;
+    /**
+     * Load google fonts.
+     */
+<span class="fstat-no" title="function not covered">    function loadGoogleFontCss() {</span>
+<span class="cstat-no" title="statement not covered">        WebFont.load({</span>
+            active: <span class="fstat-no" title="function not covered">function() {</span>
+                // Update scrollspy
+<span class="cstat-no" title="statement not covered">                $(window).scrollspy('refresh')</span>
+            },
+            google: {
+                families: ['Source Code Pro', 'Source Sans Pro:n4,n6,n7']
+            }
+        });
+    }
+&nbsp;
+    /**
+     * Return ordered entries by custom order and append not defined entries to the end.
+     * @param  {String[]} elements
+     * @param  {String[]} order
+     * @param  {String}   splitBy
+     * @return {String[]} Custom ordered list.
+     */
+<span class="fstat-no" title="function not covered">    function sortByOrder(elements, order, splitBy) {</span>
+<span class="cstat-no" title="statement not covered">        var results = [];</span>
+<span class="cstat-no" title="statement not covered">        order.forEach (<span class="fstat-no" title="function not covered">function(name) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (splitBy)</span>
+<span class="cstat-no" title="statement not covered">                elements.forEach (<span class="fstat-no" title="function not covered">function(element) {</span></span>
+<span class="cstat-no" title="statement not covered">                    var parts = element.split(splitBy);</span>
+<span class="cstat-no" title="statement not covered">                    var key = parts[1]; </span>// reference keep for sorting
+<span class="cstat-no" title="statement not covered">                    if (key == name)</span>
+<span class="cstat-no" title="statement not covered">                        results.push(element);</span>
+                });
+            else
+<span class="cstat-no" title="statement not covered">                elements.forEach (<span class="fstat-no" title="function not covered">function(key) {</span></span>
+<span class="cstat-no" title="statement not covered">                    if (key == name)</span>
+<span class="cstat-no" title="statement not covered">                        results.push(name);</span>
+                });
+        });
+        // Append all other entries that ar not defined in order
+<span class="cstat-no" title="statement not covered">        elements.forEach(<span class="fstat-no" title="function not covered">function(element) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (results.indexOf(element) === -1)</span>
+<span class="cstat-no" title="statement not covered">                results.push(element);</span>
+        });
+<span class="cstat-no" title="statement not covered">        return results;</span>
+    }
+&nbsp;
+});
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 13:50:22 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
