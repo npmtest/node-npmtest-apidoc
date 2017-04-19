@@ -1,6 +1,6 @@
 # npmtest-apidoc
 
-#### test coverage for  [apidoc (v0.17.5)](http://apidocjs.com)  [![npm package](https://img.shields.io/npm/v/npmtest-apidoc.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-apidoc) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-apidoc.svg)](https://travis-ci.org/npmtest/node-npmtest-apidoc)
+#### basic test coverage for  [apidoc (v0.17.5)](http://apidocjs.com)  [![npm package](https://img.shields.io/npm/v/npmtest-apidoc.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-apidoc) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-apidoc.svg)](https://travis-ci.org/npmtest/node-npmtest-apidoc)
 
 #### RESTful web API Documentation Generator
 
